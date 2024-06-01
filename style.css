@@ -60,10 +60,6 @@ a {
   margin-right: 0; /* Remove margin for the last column */
 }
 
-.wrapper {
-  clear: both;
-}
-
 .content {
   display: flex;
   justify-content: space-between;
@@ -201,4 +197,17 @@ a {
 .photo-container {
   flex: 1;
   margin: 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .column {
+    width: calc(50% - 10px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .column {
+    width: 100%;
+    margin-right: 0;
+  }
 }
