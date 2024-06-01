@@ -1,0 +1,204 @@
+body {
+  background-color: #1abc9c;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  padding: 8px;
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+h2 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+a {
+  text-decoration: none;
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.column a:hover,
+.column2 a:hover {
+  color: #007bff; /* Changes color on hover */
+}
+
+.column {
+  width: calc(30% - 10px);
+  float: left;
+  margin-right: 42px;
+  margin-top: 20px;
+}
+
+.column a {
+  display: block;
+  margin-bottom: 1px;
+  padding-bottom: 2px;
+}
+
+.column:last-child {
+  margin-right: 0; /* Remove margin for the last column */
+}
+
+.wrapper {
+  clear: both;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0%;
+  margin: 0;
+  flex-wrap: nowrap; /* Remove if already set */
+  flex-direction: column; /* Optional */
+
+  width: fit-content; /* or a fixed width */
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 10px; /* Optional padding */
+}
+
+#barChartWrapper {
+  display: flex;
+  justify-content: center;
+  position: relative; /* Ensures absolute positioning within this element */
+  margin-bottom: 20px; /* Space between bar chart and infoBox */
+}
+
+#barChartWrapper svg {
+  overflow: visible; /* Ensures the axis title is visible */
+}
+
+.y-axis-title {
+  font-size: 14px; /* Adjust font size as needed */
+  fill: white; /* Ensure the text is visible on the background */
+}
+
+#infoBox {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+
+  top: 50%; /* Center vertically */
+
+  display: none; /* Initially hide it */
+
+  width: fit-content; /* Ensure the width adjusts to the content */
+  height: fit-content; /* Ensure the height adjusts to the content */
+  margin-top: 2px; /* Space above */
+}
+
+#backHome {
+  color: #2c3e50;
+  background-color: #ecf0f1;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.photo-container {
+  perspective: 1000px;
+  width: 150px; /* Adjust the container width */
+  margin: 10px; /* Space between the images */
+  border: 0.5rem solid transparent;
+  aspect-ratio: 1/1;
+}
+
+.photo {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Adjust the container height */
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.photo:hover {
+  transform: rotateY(180deg);
+}
+
+.photo-front,
+.photo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0.5rem;
+}
+
+.photo-front img {
+  object-fit: cover;
+  border-radius: 0.5rem;
+  width: 100%; /* Limit width to container width */
+  height: 100%;
+}
+
+.photo-back {
+  background-color: #2c3e50;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
+  text-align: center; /* Center text horizontally */
+}
+
+.photo-back p {
+  margin: 0; /* Remove default margin */
+}
+
+#winner {
+  border: 0.2rem solid rgb(148, 240, 11);
+}
+
+#loser1,
+#loser2,
+#loser3 {
+  border: 0.2rem solid red;
+}
+
+.photo-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-container {
+  flex: 1;
+  margin: 0 10px;
+}
