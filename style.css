@@ -205,21 +205,9 @@ img[src*="Loser"] {
   filter: grayscale(100%);
 }
 
-#barChartSvg {
-  width: 100%;
-}
-
 @media screen and (max-width: 768px) {
   .column {
     width: calc(50% - 10px);
-  }
-
-  .y-axis-title {
-    font-size: 12px; /* Adjust font size for smaller screens */
-  }
-
-  #barChartSvg {
-    width: 80%;
   }
 }
 
@@ -228,35 +216,11 @@ img[src*="Loser"] {
     width: 100%;
     margin-right: 0;
   }
-
-  .photo-container {
-    width: calc(33% - 10px); /* Adjust as needed for desired image width */
-  }
-
-  .photo-grid {
-    flex-wrap: wrap; /* Allow images to wrap onto multiple lines */
-  }
-
-  #barChartSvg {
-    width: 60%; /* Adjust this value as needed */
-  }
 }
 
 @media screen and (max-width: 320px) {
   .column {
     width: 100%;
     margin-right: 0;
-  }
-
-  .photo-container {
-    width: calc(33% - 10px); /* Adjust as needed for desired image width */
-  }
-
-  #barChartSvg {
-    width: 40%; /* Adjust this value as needed */
-  }
-
-  .photo-grid {
-    flex-wrap: wrap; /* Allow images to wrap onto multiple lines */
   }
 }
