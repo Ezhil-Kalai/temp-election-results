@@ -226,6 +226,10 @@ img[src*="Winner"] {
   .column {
     width: calc(50% - 10px);
   }
+
+  .photo-back {
+    font-size: 6px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -233,11 +237,17 @@ img[src*="Winner"] {
     width: 100%;
     margin-right: 0;
   }
+  .photo-back {
+    font-size: 6px;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .column {
     width: 100%;
     margin-right: 0;
+  }
+  .photo-back {
+    font-size: 6px;
   }
 }
