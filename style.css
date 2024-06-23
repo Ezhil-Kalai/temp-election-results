@@ -230,6 +230,10 @@ img[src*="Winner"] {
   .photo-back {
     font-size: 3px;
   }
+
+  article.item {
+    margin-left: 10px; /* Adjust margin as needed */
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -240,6 +244,10 @@ img[src*="Winner"] {
   .photo-back {
     font-size: 3px;
   }
+
+  article.item {
+    margin-left: 10px; /* Adjust margin as needed */
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -249,5 +257,8 @@ img[src*="Winner"] {
   }
   .photo-back {
     font-size: 3px;
+  }
+  article.item {
+    margin-left: 10px; /* Adjust margin as needed */
   }
 }
