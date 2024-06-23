@@ -48,6 +48,7 @@ a {
   float: left;
   margin-right: 42px;
   margin-top: 20px;
+  margin-left: 20px;
 }
 
 .column a {
@@ -230,10 +231,6 @@ img[src*="Winner"] {
   .photo-back {
     font-size: 3px;
   }
-
-  article.item {
-    margin-left: 10px; /* Adjust margin as needed */
-  }
 }
 
 @media screen and (max-width: 480px) {
@@ -244,10 +241,6 @@ img[src*="Winner"] {
   .photo-back {
     font-size: 3px;
   }
-
-  article.item {
-    margin-left: 10px; /* Adjust margin as needed */
-  }
 }
 
 @media screen and (max-width: 320px) {
@@ -257,8 +250,5 @@ img[src*="Winner"] {
   }
   .photo-back {
     font-size: 3px;
-  }
-  article.item {
-    margin-left: 10px; /* Adjust margin as needed */
   }
 }
