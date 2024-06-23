@@ -219,7 +219,7 @@ img[src*="Loser"]::after {
 }
 
 img[src*="Winner"] {
-  border: 7px solid green; /* Apply green border */
+  border: 5px solid green; /* Apply green border */
 }
 
 @media screen and (max-width: 768px) {
