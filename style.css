@@ -228,9 +228,6 @@ img[src*="Loser"] {
     width: 100%;
     margin-right: 0;
   }
-  .photo-container {
-    flex: 1 1 calc(50% - 20px); /* Adjust for 2 items in a row with margin */
-  }
 
   #barChartSvg {
     width: 60%; /* Adjust this value as needed */
@@ -241,9 +238,6 @@ img[src*="Loser"] {
   .column {
     width: 100%;
     margin-right: 0;
-  }
-  .photo-container {
-    flex: 1 1 calc(50% - 20px); /* Adjust for 2 items in a row with margin */
   }
 
   #barChartSvg {
