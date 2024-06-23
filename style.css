@@ -203,6 +203,23 @@ a {
 /* Apply grayscale to images with src attribute containing "Loser" */
 img[src*="Loser"] {
   filter: grayscale(100%);
+  position: relative;
+}
+
+/* Border for grayscale images */
+img[src*="Loser"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 12px solid red; /* Apply red border */
+  pointer-events: none; /* Ensure the border doesn't interfere with clicks */
+}
+
+img[src*="Winner"] {
+  border: 7px solid green; /* Apply green border */
 }
 
 @media screen and (max-width: 768px) {
