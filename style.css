@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  height: auto;
 }
 
 .header {
@@ -63,19 +63,21 @@ a {
 .content {
   display: flex;
   justify-content: space-between;
+
   align-items: flex-start;
   padding: 0%;
   margin: 0;
   flex-wrap: nowrap; /* Remove if already set */
   flex-direction: column; /* Optional */
 
-  width: fit-content; /* or a fixed width */
+  width: -moz-fit-content; /* or a fixed width */
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Center content vertically */
   width: 100%;
   max-width: 800px; /* Adjust as needed */
   margin: 0 auto;
@@ -86,10 +88,15 @@ a {
   display: flex;
   justify-content: center;
   position: relative; /* Ensures absolute positioning within this element */
-  margin-bottom: 20px; /* Space between bar chart and infoBox */
+  margin-bottom: 0; /* Space between bar chart and infoBox */
+  width: 100%; /* Ensure it takes full width */
+  max-width: 800px; /* Optional: limit the max width */
+  overflow: hidden;
 }
 
 #barChartWrapper svg {
+  width: 100%; /* Ensure SVG scales with container */
+
   overflow: visible; /* Ensures the axis title is visible */
 }
 
@@ -106,7 +113,7 @@ a {
   color: white; /* White text color */
   padding: 10px 20px; /* Padding around the text */
   border-radius: 5px; /* Rounded corners */
-
+  margin-bottom: 10px; /* Adjust as needed */
   top: 50%; /* Center vertically */
 
   display: none; /* Initially hide it */
@@ -173,25 +180,19 @@ a {
   padding: 10px;
   box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
   text-align: center; /* Center text horizontally */
+  overflow: hidden; /* Prevent text overflow */
+  font-size: 12px; /* Set a smaller font size */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
 }
 
 .photo-back p {
   margin: 0; /* Remove default margin */
 }
 
-#winner {
-  border: 0.2rem solid rgb(148, 240, 11);
-}
-
-#loser1,
-#loser2,
-#loser3 {
-  border: 0.2rem solid red;
-}
-
 .photo-grid {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow wrapping for grid items */
 }
 
 .photo-container {
@@ -199,9 +200,26 @@ a {
   margin: 0 10px;
 }
 
+/* Apply grayscale to images with src attribute containing "Loser" */
+img[src*="Loser"] {
+  filter: grayscale(100%);
+}
+
+#barChartSvg {
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .column {
     width: calc(50% - 10px);
+  }
+
+  .y-axis-title {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  #barChartSvg {
+    width: 80%;
   }
 }
 
@@ -209,5 +227,26 @@ a {
   .column {
     width: 100%;
     margin-right: 0;
+  }
+  .photo-container {
+    flex: 1 1 calc(50% - 20px); /* Adjust for 2 items in a row with margin */
+  }
+
+  #barChartSvg {
+    width: 60%; /* Adjust this value as needed */
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .column {
+    width: 100%;
+    margin-right: 0;
+  }
+  .photo-container {
+    flex: 1 1 calc(50% - 20px); /* Adjust for 2 items in a row with margin */
+  }
+
+  #barChartSvg {
+    width: 40%; /* Adjust this value as needed */
   }
 }

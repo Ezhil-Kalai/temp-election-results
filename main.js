@@ -4,14 +4,14 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 function createInfoBox(totalCandidates) {
   const infoBox = document.getElementById("infoBox");
   if (infoBox) {
-    infoBox.textContent = `Total number of candidates: ${totalCandidates}`;
+    infoBox.textContent = `Total number of candidates (Excluding NOTA): ${totalCandidates}`;
     infoBox.style.display = "flex"; // Show the infoBox
   }
 }
 // Function to draw the bar chart
 async function drawBars(constituencyName) {
   try {
-    const data = await d3.csv("/TN2019.csv");
+    const data = await d3.csv("/resultsPC24.csv");
     const filteredData = data.filter(
       (d) => d.pc.trim().toLowerCase() === constituencyName.trim().toLowerCase()
     );
@@ -25,20 +25,21 @@ async function drawBars(constituencyName) {
       .sort((a, b) => b.Votes_Total - a.Votes_Total)
       .slice(0, 4);
 
-    await createInfoBox(filteredData.length - 1);
-
     const xAccessor = (d) => d.name;
     const yAccessor = (d) => +d.Votes_Total;
 
-    const width = 600;
+    // const width = 600;
+
+    const screenWidth = window.innerWidth;
+    const width = Math.min(600, screenWidth - 20); // Adjust width as needed
     let dimensions = {
       width,
       height: width * 0.8,
       margin: {
         top: 30,
         right: 10,
-        bottom: 90,
-        left: 100,
+        bottom: 150,
+        left: 90,
       },
     };
 
@@ -52,6 +53,7 @@ async function drawBars(constituencyName) {
     const wrapper = d3
       .select("#barChartWrapper")
       .append("svg")
+      .attr("id", "barChartSvg")
       .attr("width", dimensions.width)
       .attr("height", dimensions.height);
 
@@ -150,6 +152,7 @@ async function drawBars(constituencyName) {
         "transform",
         `translate(-20, ${dimensions.boundedHeight / 2}) rotate(-90)`
       )
+      .attr("id", "y-axis-title")
       .attr("text-anchor", "middle")
       .attr("font-size", "13px")
       .attr("font-weight", "bold")
@@ -159,13 +162,34 @@ async function drawBars(constituencyName) {
   }
 }
 
+function convertToTitleCase(inputString) {
+  // Convert the input string to lowercase
+  let lowercaseString = inputString.toLowerCase();
+
+  // Split the string into an array of words
+  let words = lowercaseString.split(" ");
+
+  // Iterate over each word and capitalize the first letter
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  // Join the words back into a single string
+  let titleCaseString = words.join(" ");
+
+  return titleCaseString;
+}
+
 // Function to display candidate images with flipping effect
 async function displayCandidateImages(constituencyName) {
   try {
-    const data = await d3.csv("/TN2019.csv");
+    const data = await d3.csv("/resultsPC24.csv");
     const filteredData = data.filter(
       (d) => d.pc.trim().toLowerCase() === constituencyName.trim().toLowerCase()
     );
+
+    await createInfoBox(filteredData.length - 1);
 
     const topCandidates = filteredData
       .sort((a, b) => b.Votes_Total - a.Votes_Total)
@@ -173,12 +197,15 @@ async function displayCandidateImages(constituencyName) {
 
     const candidateImagesDiv = document.getElementById("candidateImages");
 
-    const candiFolder = constituencyName.replace(/\s+/g, "");
+    let candiFolder = constituencyName.replace(/\s+/g, "");
+
+    let titleCaseCandiFolder = convertToTitleCase(candiFolder);
+    console.log(titleCaseCandiFolder);
 
     // Log candidate details to console
     topCandidates.forEach((candidate, index) => {
       console.log(
-        `Name: ${candidate.name}, Party: ${candidate.party}, Age: ${candidate.age}, Category: ${candidate.category}, Index: ${index}`
+        `Name: ${candidate.name}, Party: ${candidate.party}, Index: ${index}, Constituency:${candidate.pc}`
       );
     });
 
@@ -188,22 +215,22 @@ async function displayCandidateImages(constituencyName) {
           .map(
             (candidate, index) => `
           <div class="photo-container" id="${
-            index === 0 ? "winner" : "loser" + index
+            index === 0 ? "Winner" : "Loser " + index
           }">
             <div class="photo">
               <div class="photo-front">
                 <img
-                  src="/pics/${candiFolder}/${
-              index === 0 ? "winner" : "loser" + index
-            }.jpeg"
+                  src="/candi-pics/${titleCaseCandiFolder}/${
+              index === 0 ? "Winner" : "Loser " + index
+            }.jpg"
                   class="photo-img"
                   alt="${candidate.name}"
                 />
               </div>
               <div class="photo-back">
               
-                <p>Age: ${candidate.age}</p>
-                <p>Symbol: ${candidate.symbol}</p>
+                <p>Name: ${candidate.name}</p>
+                <p>Party: ${candidate.party}</p>
                
               </div>
             </div>
@@ -228,6 +255,7 @@ document.querySelectorAll(".constituencyLink").forEach((link) => {
     const constituencyTitle = document.getElementById("constituencyTitle");
     constituencyTitle.textContent = `${constituencyName}`;
     constituencyTitle.style.display = "block"; // Make the h2 element visible
+
     await drawBars(constituencyName);
     await displayCandidateImages(constituencyName); // Call displayCandidateImages here
 
