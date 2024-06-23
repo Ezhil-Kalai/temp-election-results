@@ -233,6 +233,10 @@ img[src*="Loser"] {
     width: calc(33% - 10px); /* Adjust as needed for desired image width */
   }
 
+  .photo-grid {
+    flex-wrap: wrap; /* Allow images to wrap onto multiple lines */
+  }
+
   #barChartSvg {
     width: 60%; /* Adjust this value as needed */
   }
@@ -250,5 +254,9 @@ img[src*="Loser"] {
 
   #barChartSvg {
     width: 40%; /* Adjust this value as needed */
+  }
+
+  .photo-grid {
+    flex-wrap: wrap; /* Allow images to wrap onto multiple lines */
   }
 }
