@@ -40,7 +40,7 @@ async function drawBars(constituencyName) {
       margin: {
         top: 30,
         right: 10,
-        bottom: 150,
+        bottom: 100,
         left: 80,
       },
     };
@@ -270,13 +270,15 @@ document.querySelectorAll(".constituencyLink").forEach((link) => {
 
 document.getElementById("backHome").addEventListener("click", (event) => {
   event.preventDefault();
+
+  document.getElementById("candidateImages").style.display = "none";
   document.getElementById("homePage").style.display = "block";
 
   document.getElementById("columnHead").textContent = "Constituencies";
 
   document.getElementById("backHome").style.display = "none";
+
   document.getElementById("barChartSvg").style.display = "none";
-  document.getElementById("candidateImages").style.display = "none";
 
   document.getElementById("infoBox").style.display = "none";
 });
