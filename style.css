@@ -1,5 +1,5 @@
 body {
-  background-color: #1abc9c;
+  background: radial-gradient(circle, #05294b 30%, #000000 80%);
   color: white;
   display: flex;
   justify-content: center;
@@ -8,6 +8,7 @@ body {
   margin: 0;
   padding: 0;
   height: auto;
+  overflow: hidden;
 }
 
 .header {
@@ -38,22 +39,33 @@ a {
   font-style: normal;
 }
 
+.container {
+  width: 92%;
+  display: flex;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-between;
+  margin-left: auto;
+}
+
 .column a:hover,
 .column2 a:hover {
-  color: #007bff; /* Changes color on hover */
+  color: white; /* Changes color on hover */
 }
 
 .column {
-  width: calc(30% - 10px);
+  width: calc(25% - 10px);
   float: left;
-  margin-right: 42px;
   margin-top: 20px;
+  padding-right: 5px; /* Added padding to prevent text overlap */
 }
 
 .column a {
   display: block;
-  margin-bottom: 1px;
+  color: #69d9f1;
+  margin-bottom: 3px;
   padding-bottom: 2px;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .column:last-child {
@@ -61,7 +73,6 @@ a {
 }
 
 .content {
-  display: flex;
   justify-content: space-between;
 
   align-items: flex-start;
@@ -88,10 +99,11 @@ a {
   display: flex;
   justify-content: center;
   position: relative; /* Ensures absolute positioning within this element */
-  margin-bottom: 0; /* Space between bar chart and infoBox */
+  margin: 0;
+  height: 100%;
   width: 100%; /* Ensure it takes full width */
   max-width: 800px; /* Optional: limit the max width */
-  overflow: hidden;
+  overflow: visible;
 }
 
 #barChartWrapper svg {
@@ -105,9 +117,18 @@ a {
   fill: white; /* Ensure the text is visible on the background */
 }
 
-#infoBox {
+.candidateImages {
   display: flex;
-  justify-content: center; /* Center horizontally */
+}
+
+#backDiv {
+  justify-content: left; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 10px 20px;
+}
+
+#infoBox {
+  justify-content: left; /* Center horizontally */
   align-items: center; /* Center vertically */
   background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
   color: white; /* White text color */
@@ -127,11 +148,10 @@ a {
   color: #2c3e50;
   background-color: #ecf0f1;
   text-decoration: none;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 5px;
-  position: fixed;
-  top: 20px;
-  right: 20px;
+
+  display: none;
 }
 
 .photo-container {
@@ -187,6 +207,15 @@ a {
 
 .photo-back p {
   margin: 0; /* Remove default margin */
+  padding: 5px 0;
+}
+
+.candidate-name {
+  align-self: flex-start; /* Align name to the top */
+}
+
+.candidate-party {
+  align-self: flex-end; /* Align party to the bottom */
 }
 
 .photo-grid {
@@ -202,7 +231,7 @@ a {
 
 /* Apply grayscale to images with src attribute containing "Loser" */
 img[src*="Loser"] {
-  filter: grayscale(100%);
+  border: 5px solid red;
   position: relative;
 }
 
@@ -227,11 +256,14 @@ img[src*="Winner"] {
     width: calc(50% - 10px);
   }
 
-  .photo-back {
-    font-size: 3px;
+  .photo:hover {
+    transform: none;
   }
   .column {
     margin-left: 20px;
+  }
+  #barChartWrapper {
+    height: 450px;
   }
 }
 
@@ -240,11 +272,14 @@ img[src*="Winner"] {
     width: 100%;
     margin-right: 0;
   }
-  .photo-back {
-    font-size: 3px;
+  .photo:hover {
+    transform: none;
   }
   .column {
     margin-left: 20px;
+  }
+  #barChartWrapper {
+    height: 450px;
   }
 }
 
@@ -253,10 +288,13 @@ img[src*="Winner"] {
     width: 100%;
     margin-right: 0;
   }
-  .photo-back {
-    font-size: 3px;
+  .photo:hover {
+    transform: none;
   }
   .column {
     margin-left: 20px;
+  }
+  #barChartWrapper {
+    height: 450px;
   }
 }

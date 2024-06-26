@@ -25,21 +25,23 @@ async function drawBars(constituencyName) {
       .sort((a, b) => b.Votes_Total - a.Votes_Total)
       .slice(0, 4);
 
+    await displayCandidateImages(constituencyName);
+
     const xAccessor = (d) => d.name;
     const yAccessor = (d) => +d.Votes_Total;
 
     // const width = 600;
 
     const screenWidth = window.innerWidth;
-    const width = Math.min(600, screenWidth - 20); // Adjust width as needed
+    const width = Math.min(700, screenWidth - 20); // Adjust width as needed
     let dimensions = {
       width,
-      height: width * 0.8,
+      height: width * 0.71,
       margin: {
         top: 30,
         right: 10,
         bottom: 150,
-        left: 90,
+        left: 85,
       },
     };
 
@@ -68,7 +70,7 @@ async function drawBars(constituencyName) {
       .scaleBand()
       .domain(topCandidates.map((d) => d.name))
       .range([0, dimensions.boundedWidth])
-      .padding(0.08);
+      .padding(0.1);
 
     const yScale = d3
       .scaleLinear()
@@ -87,7 +89,7 @@ async function drawBars(constituencyName) {
       .attr("y", (d) => yScale(yAccessor(d)))
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
-      .attr("fill", "#EEFF41");
+      .attr("fill", "#1db6d5");
 
     const indianLocale = d3.formatLocale({
       decimal: ".",
@@ -136,7 +138,7 @@ async function drawBars(constituencyName) {
           .attr("x", 0)
           .attr("dy", "1em")
           .attr("font-size", "10px")
-          .attr("fill", "#33691E")
+          .attr("fill", "white")
           .attr("font-weight", "bold")
           .text(candidate.party);
       });
@@ -150,7 +152,7 @@ async function drawBars(constituencyName) {
       .attr("class", "y-axis-title")
       .attr(
         "transform",
-        `translate(-20, ${dimensions.boundedHeight / 2}) rotate(-90)`
+        `translate(1, ${dimensions.boundedHeight / 2}) rotate(-90)`
       )
       .attr("id", "y-axis-title")
       .attr("text-anchor", "middle")
@@ -196,11 +198,12 @@ async function displayCandidateImages(constituencyName) {
       .slice(0, 4);
 
     const candidateImagesDiv = document.getElementById("candidateImages");
+    console.log(candidateImagesDiv);
 
     let candiFolder = constituencyName.replace(/\s+/g, "");
 
     let titleCaseCandiFolder = convertToTitleCase(candiFolder);
-    console.log(titleCaseCandiFolder);
+    // console.log(titleCaseCandiFolder);
 
     // Log candidate details to console
     topCandidates.forEach((candidate, index) => {
@@ -229,8 +232,8 @@ async function displayCandidateImages(constituencyName) {
               </div>
               <div class="photo-back">
               
-                <p>Name: ${candidate.name}</p>
-                <p>Party: ${candidate.party}</p>
+                <p class="candidate-name">${candidate.name}</p>
+                <p class="candidate-party">${candidate.party}</p>
                
               </div>
             </div>
@@ -250,17 +253,17 @@ document.querySelectorAll(".constituencyLink").forEach((link) => {
   link.addEventListener("click", async (event) => {
     event.preventDefault();
     const constituencyName = link.textContent.trim();
+    console.log(constituencyName);
 
     // Display the constituency name
-    const constituencyTitle = document.getElementById("constituencyTitle");
-    constituencyTitle.textContent = `${constituencyName}`;
-    constituencyTitle.style.display = "block"; // Make the h2 element visible
+    const constituencyTitle = document.getElementById("columnHead");
 
+    constituencyTitle.textContent = `${constituencyName}`;
+    document.getElementById("candidateImages").style.display = "flex";
     await drawBars(constituencyName);
-    await displayCandidateImages(constituencyName); // Call displayCandidateImages here
+    // Call displayCandidateImages here
 
     document.getElementById("homePage").style.display = "none";
-    document.getElementById("columnHead").style.display = "none";
     document.getElementById("backHome").style.display = "block";
   });
 });
@@ -268,16 +271,12 @@ document.querySelectorAll(".constituencyLink").forEach((link) => {
 document.getElementById("backHome").addEventListener("click", (event) => {
   event.preventDefault();
   document.getElementById("homePage").style.display = "block";
-  document.getElementById("columnHead").style.display = "block";
+
+  document.getElementById("columnHead").textContent = "Constituencies";
+
   document.getElementById("backHome").style.display = "none";
-  document.getElementById("barChartWrapper").innerHTML = "";
-  document.getElementById("candidateImages").innerHTML = ""; // Clear candidate images
+  document.getElementById("barChartSvg").style.display = "none";
+  document.getElementById("candidateImages").style.display = "none";
 
-  // Hide the constituency title
-  const constituencyTitle = document.getElementById("constituencyTitle");
-  constituencyTitle.style.display = "none";
-
-  // Remove the infoBox
-  const infoBox = document.getElementById("infoBox");
-  infoBox.style.display = "none";
+  document.getElementById("infoBox").style.display = "none";
 });
