@@ -73,11 +73,11 @@ a {
 }
 
 .content {
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   align-items: flex-start;
   padding: 0%;
-  margin: 0;
+
   flex-wrap: nowrap; /* Remove if already set */
   flex-direction: column; /* Optional */
 
@@ -90,8 +90,8 @@ a {
   align-items: center;
   justify-content: center; /* Center content vertically */
   width: 100%;
-  max-width: 800px; /* Adjust as needed */
-  margin: 0 auto;
+  /* max-width: 900px; Adjust as needed */
+  /* margin-top: -10px; */
   padding: 10px; /* Optional padding */
 }
 
@@ -99,7 +99,7 @@ a {
   display: flex;
   justify-content: center;
   position: relative; /* Ensures absolute positioning within this element */
-  margin: 0;
+  margin-top: -5%;
   height: 100%;
   width: 100%; /* Ensure it takes full width */
   max-width: 800px; /* Optional: limit the max width */
@@ -115,10 +115,6 @@ a {
 .y-axis-title {
   font-size: 14px; /* Adjust font size as needed */
   fill: white; /* Ensure the text is visible on the background */
-}
-
-.candidateImages {
-  display: flex;
 }
 
 #backDiv {
@@ -154,20 +150,13 @@ a {
   display: none;
 }
 
-.photo-container {
-  perspective: 1000px;
-  width: 150px; /* Adjust the container width */
-  margin: 10px; /* Space between the images */
-  border: 0.5rem solid transparent;
-  aspect-ratio: 1/1;
-}
-
 .photo {
   position: relative;
   width: 100%;
   height: 100%; /* Adjust the container height */
   transform-style: preserve-3d;
   transition: transform 0.6s;
+  margin-left: 2%;
 }
 
 .photo:hover {
@@ -183,11 +172,17 @@ a {
   border-radius: 0.5rem;
 }
 
+.photo-back {
+  width: 90%;
+  height: 80%;
+}
+
 .photo-front img {
   object-fit: cover;
   border-radius: 0.5rem;
-  width: 100%; /* Limit width to container width */
-  height: 100%;
+
+  width: 55%;
+  height: 65%;
 }
 
 .photo-back {
@@ -205,11 +200,6 @@ a {
   text-overflow: ellipsis; /* Show ellipsis for overflowed text */
 }
 
-.photo-back p {
-  margin: 0; /* Remove default margin */
-  padding: 5px 0;
-}
-
 .candidate-name {
   align-self: flex-start; /* Align name to the top */
 }
@@ -225,8 +215,12 @@ a {
 }
 
 .photo-container {
+  perspective: 1000px;
   flex: 1;
-  margin: 0 10px;
+  width: 130px; /* Adjust the container width */
+  margin: 0px 11px;
+  overflow: hidden;
+  aspect-ratio: 1/1;
 }
 
 /* Apply grayscale to images with src attribute containing "Loser" */
@@ -239,10 +233,10 @@ img[src*="Loser"] {
 img[src*="Loser"]::after {
   content: "";
   position: absolute;
-  top: 0;
+  /* top: 1000px;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: 0; */
   border: 12px solid red; /* Apply red border */
   pointer-events: none; /* Ensure the border doesn't interfere with clicks */
 }
