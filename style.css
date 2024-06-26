@@ -247,7 +247,7 @@ img[src*="Winner"] {
 
 @media screen and (max-width: 768px) {
   .column {
-    width: calc(50% - 10px);
+    width: calc(25% - 10px);
   }
 
   .photo:hover {
@@ -263,6 +263,7 @@ img[src*="Winner"] {
 
 @media screen and (max-width: 480px) {
   .column {
+    width: calc(50% - 10px); /* Adjusted for four columns */
     width: 100%;
     margin-right: 0;
   }
