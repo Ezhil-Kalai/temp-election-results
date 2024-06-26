@@ -38,7 +38,7 @@ async function drawBars(constituencyName) {
       width,
       height: width * 0.67,
       margin: {
-        top: 30,
+        top: 50,
         right: 10,
         bottom: 100,
         left: 80,
