@@ -143,12 +143,15 @@ async function drawBars(constituencyName) {
           .text(candidate.party);
       });
 
-    const yAxisGenerator = d3.axisLeft().scale(yScale);
+    const yAxisGenerator = d3
+      .axisLeft()
+      .scale(yScale)
+      .tickFormat((d) => indianFormat(d));
     const yAxis = bounds.append("g").call(yAxisGenerator);
     yAxis
       .selectAll("text")
       .style("font-family", "Roboto, sans-serif")
-      .attr("font-size", "10px");
+      .attr("font-size", "11px");
 
     // Add the Y-axis title to the wrapper svg
     wrapper
