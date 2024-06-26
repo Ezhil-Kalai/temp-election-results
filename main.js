@@ -90,7 +90,6 @@ async function drawBars(constituencyName) {
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
       .attr("fill", "#1db6d5");
-
     const indianLocale = d3.formatLocale({
       decimal: ".",
       thousands: ",",
@@ -110,7 +109,8 @@ async function drawBars(constituencyName) {
       .attr("font-size", "14px")
       .attr("font-weight", "bold")
       .attr("fill", "white")
-      .text((d) => indianFormat(yAccessor(d)));
+      .text((d) => indianFormat(yAccessor(d)))
+      .style("font-family", "Roboto, sans-serif");
 
     const xAxisGenerator = d3.axisBottom().scale(xScale);
     const xAxis = bounds
@@ -145,6 +145,10 @@ async function drawBars(constituencyName) {
 
     const yAxisGenerator = d3.axisLeft().scale(yScale);
     const yAxis = bounds.append("g").call(yAxisGenerator);
+    yAxis
+      .selectAll("text")
+      .style("font-family", "Roboto, sans-serif")
+      .attr("font-size", "10px");
 
     // Add the Y-axis title to the wrapper svg
     wrapper
