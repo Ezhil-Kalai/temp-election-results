@@ -46,7 +46,7 @@ h2 {
 #info {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 6px;
+  padding: 5px;
   margin-bottom: 10px;
 }
 
@@ -141,10 +141,6 @@ img[src*="Winner"] {
     height: 100px;
 
     padding: 0;
-  }
-
-  .wrapper .barChart {
-    margin-left: -50px;
   }
 
   .wrapper .barChart #barChartWrapper {
