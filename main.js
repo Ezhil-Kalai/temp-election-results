@@ -2,10 +2,12 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 // Function to create and update the infoBox div
 function createInfoBox(totalCandidates) {
-  const infoBox = document.getElementById("infoBox");
+  const infoBox = document.getElementById("info");
+
   if (infoBox) {
-    infoBox.textContent = `Total number of candidates (Excluding NOTA): ${totalCandidates}`;
-    infoBox.style.display = "flex"; // Show the infoBox
+    const paragraph = document.createElement("p");
+    paragraph.textContent = `Total number of candidates (Excluding NOTA): ${totalCandidates}`;
+    infoBox.appendChild(paragraph);
   }
 }
 // Function to draw the bar chart
@@ -25,8 +27,6 @@ async function drawBars(constituencyName) {
       .sort((a, b) => b.Votes_Total - a.Votes_Total)
       .slice(0, 4);
 
-    await displayCandidateImages(constituencyName);
-
     const xAccessor = (d) => d.name;
     const yAccessor = (d) => +d.Votes_Total;
 
@@ -36,11 +36,11 @@ async function drawBars(constituencyName) {
     const width = Math.min(700, screenWidth - 20); // Adjust width as needed
     let dimensions = {
       width,
-      height: width * 0.67,
+      height: width * 0.88,
       margin: {
         top: 50,
         right: 10,
-        bottom: 100,
+        bottom: 110,
         left: 80,
       },
     };
@@ -106,7 +106,7 @@ async function drawBars(constituencyName) {
       .attr("x", (d) => xScale(xAccessor(d)) + xScale.bandwidth() / 2)
       .attr("y", (d) => yScale(yAccessor(d)) - 5)
       .style("text-anchor", "middle")
-      .attr("font-size", "14px")
+      .attr("font-size", "12px")
       .attr("font-weight", "bold")
       .attr("fill", "white")
       .text((d) => indianFormat(yAccessor(d)))
@@ -120,7 +120,7 @@ async function drawBars(constituencyName) {
 
     xAxis
       .selectAll("text")
-      .attr("transform", "rotate(-30)")
+      .attr("transform", "rotate(-45)")
       .style("text-anchor", "end")
       .each(function (d) {
         const self = d3.select(this);
@@ -130,28 +130,30 @@ async function drawBars(constituencyName) {
           .append("tspan")
           .attr("x", 0)
           .attr("dy", "1em")
-          .attr("font-size", "13px")
-          .attr("font-weight", "bold")
+          .attr("font-size", "11px")
+
           .text(candidate.name);
         self
           .append("tspan")
           .attr("x", 0)
           .attr("dy", "1em")
-          .attr("font-size", "10px")
+          .attr("font-size", "9px")
           .attr("fill", "white")
-          .attr("font-weight", "bold")
+
           .text(candidate.party);
       });
 
     const yAxisGenerator = d3
       .axisLeft()
       .scale(yScale)
-      .tickFormat((d) => indianFormat(d));
+      .tickFormat((d) => indianFormat(d))
+      .attr("class", "yLine");
     const yAxis = bounds.append("g").call(yAxisGenerator);
     yAxis
       .selectAll("text")
       .style("font-family", "Roboto, sans-serif")
-      .attr("font-size", "11px");
+      .attr("font-size", "11px")
+      .attr("class", "ytext");
 
     // Add the Y-axis title to the wrapper svg
     wrapper
@@ -159,7 +161,7 @@ async function drawBars(constituencyName) {
       .attr("class", "y-axis-title")
       .attr(
         "transform",
-        `translate(1, ${dimensions.boundedHeight / 2}) rotate(-90)`
+        `translate(16, ${dimensions.boundedHeight / 2}) rotate(-90)`
       )
       .attr("id", "y-axis-title")
       .attr("text-anchor", "middle")
@@ -198,58 +200,39 @@ async function displayCandidateImages(constituencyName) {
       (d) => d.pc.trim().toLowerCase() === constituencyName.trim().toLowerCase()
     );
 
-    await createInfoBox(filteredData.length - 1);
+    createInfoBox(filteredData.length - 1);
 
     const topCandidates = filteredData
       .sort((a, b) => b.Votes_Total - a.Votes_Total)
       .slice(0, 4);
 
     const candidateImagesDiv = document.getElementById("candidateImages");
-    console.log(candidateImagesDiv);
 
     let candiFolder = constituencyName.replace(/\s+/g, "");
 
     let titleCaseCandiFolder = convertToTitleCase(candiFolder);
-    // console.log(titleCaseCandiFolder);
 
-    // Log candidate details to console
-    topCandidates.forEach((candidate, index) => {
-      console.log(
-        `Name: ${candidate.name}, Party: ${candidate.party}, Index: ${index}, Constituency:${candidate.pc}`
-      );
-    });
+    const candidateImageGrid = `
+<div class="photo-grid">
+         ${topCandidates
+           .map(
+             (candidate, index) => `
 
-    candidateImagesDiv.innerHTML = `
-      <div class="photo-grid">
-        ${topCandidates
-          .map(
-            (candidate, index) => `
-          <div class="photo-container" id="${
-            index === 0 ? "Winner" : "Loser " + index
-          }">
-            <div class="photo">
-              <div class="photo-front">
                 <img
                   src="/candi-pics/${titleCaseCandiFolder}/${
-              index === 0 ? "Winner" : "Loser " + index
-            }.jpg"
-                  class="photo-img"
+               index === 0 ? "Winner" : "Loser " + index
+             }.jpg"
+
                   alt="${candidate.name}"
                 />
-              </div>
-              <div class="photo-back">
-              
-                <p class="candidate-name">${candidate.name}</p>
-                <p class="candidate-party">${candidate.party}</p>
-               
-              </div>
-            </div>
-          </div>
+
         `
-          )
-          .join("")}
+           )
+           .join("")}
       </div>
     `;
+
+    candidateImagesDiv.innerHTML = candidateImageGrid;
   } catch (error) {
     console.error("Error loading or processing data:", error);
   }
@@ -261,31 +244,22 @@ document.querySelectorAll(".constituencyLink").forEach((link) => {
     event.preventDefault();
     const constituencyName = link.textContent.trim();
     console.log(constituencyName);
+    document.getElementById("homePage").style.display = "none";
 
-    // Display the constituency name
     const constituencyTitle = document.getElementById("columnHead");
 
     constituencyTitle.textContent = `${constituencyName}`;
-    document.getElementById("candidateImages").style.display = "flex";
-    await drawBars(constituencyName);
-    // Call displayCandidateImages here
 
-    document.getElementById("homePage").style.display = "none";
+    await displayCandidateImages(constituencyName);
+
+    await drawBars(constituencyName);
+
     document.getElementById("backHome").style.display = "block";
   });
 });
 
-document.getElementById("backHome").addEventListener("click", (event) => {
-  event.preventDefault();
+const bToHome = document.getElementById("backHome");
 
-  document.getElementById("candidateImages").style.display = "none";
-  document.getElementById("homePage").style.display = "block";
-
-  document.getElementById("columnHead").textContent = "Constituencies";
-
-  document.getElementById("backHome").style.display = "none";
-
-  document.getElementById("barChartSvg").style.display = "none";
-
-  document.getElementById("infoBox").style.display = "none";
+bToHome.addEventListener("click", () => {
+  window.location.href = "/"; // Replace "/" with your actual homepage URL
 });

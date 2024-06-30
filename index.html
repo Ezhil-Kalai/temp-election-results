@@ -30,14 +30,16 @@
   </head>
   <body>
     <div class="header">
-      <h1>Tamil Nadu Lok Sabha Election Results - 2024</h1>
-      <h2 id="columnHead" style="margin-top: -15px; text-align: center">
-        Constituencies
-      </h2>
+      <h1 class="card">Tamil Nadu Lok Sabha Election Results - 2024</h1>
+      <h2 class="card" id="columnHead">Constituencies</h2>
     </div>
+    <div class="blackTotal">
+      <button id="backHome" style="display: none">
+        Back To Constituencies
+      </button>
 
-    <div id="backDiv"><a href="#" id="backHome">Back to Constituencies</a></div>
-    <div id="infoBox"></div>
+      <div id="info"></div>
+    </div>
     <div class="container" id="homePage">
       <div class="column" id="column1">
         <a href="#" class="constituencyLink">ARAKKONAM</a><br /><br />
@@ -92,16 +94,12 @@
     </div>
 
     <div class="wrapper">
-      <div class="content">
-        <article id="candidateImages"></article>
-      </div>
+      <div id="candidateImages"></div>
 
-      <div id="barChartWrapper"></div>
+      <div class="barChart" id="barChartWrapper"></div>
 
       <svg>
-        <text class="y-axis-title" transform="translate(-50, 300) rotate(-90)">
-          Total Votes
-        </text>
+        <text class="y-axis-title">Total Votes</text>
       </svg>
     </div>
 
