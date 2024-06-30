@@ -129,8 +129,8 @@ async function drawBars(constituencyName) {
         self
           .append("tspan")
           .attr("x", 0)
-          .attr("dy", "1em")
-          .attr("font-size", "11px")
+
+          .attr("font-size", "9px")
 
           .text(candidate.name);
         self
