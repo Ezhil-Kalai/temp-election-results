@@ -143,9 +143,12 @@ img[src*="Winner"] {
     padding: 0;
   }
 
+  .wrapper .barChart {
+    margin-left: -50px;
+  }
+
   .wrapper .barChart #barChartWrapper {
     flex-wrap: wrap;
-    width: calc(60% - 2rem);
 
     flex-shrink: 1;
 
