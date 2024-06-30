@@ -120,7 +120,7 @@ async function drawBars(constituencyName) {
 
     xAxis
       .selectAll("text")
-      .attr("transform", "rotate(-45)")
+      .attr("transform", "rotate(-30)")
       .style("text-anchor", "end")
       .each(function (d) {
         const self = d3.select(this);
