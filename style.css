@@ -90,7 +90,7 @@ h2 {
   flex-direction: column;
   align-items: center;
 
-  justify-content: space-evenly;
+  justify-content: center;
   margin: 0;
   padding: 0;
   flex-wrap: wrap;
@@ -153,7 +153,7 @@ img[src*="Winner"] {
   }
 
   .y-axis-title {
-    /* display: none; */
+    display: none;
     font-size: 11px; /* Adjust font size as needed */
     fill: white; /* Ensure the text is visible on the background */
     margin: 0;

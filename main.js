@@ -36,7 +36,7 @@ async function drawBars(constituencyName) {
     const width = Math.min(700, screenWidth - 20); // Adjust width as needed
     let dimensions = {
       width,
-      height: width * 0.88,
+      height: width * 0.8,
       margin: {
         top: 50,
         right: 10,
